@@ -169,8 +169,17 @@ class EnzymeMLImporter:
 
         # convert data
         self._write_experimental_data()
-
         dm.saveModel(self.copasi_file, True)
+
+        # add plot for progress & result
+        dm.loadModel(self.copasi_file)
+        task = dm.getTask('Parameter Estimation')
+        task.setMethodType(COPASI.CTaskEnum.Method_Statistics)
+        COPASI.COutputAssistant.getListOfDefaultOutputDescriptions(task)
+        COPASI.COutputAssistant.createDefaultOutput(913, task, dm)
+        COPASI.COutputAssistant.createDefaultOutput(910, task, dm)
+        dm.saveModel(self.copasi_file, True)
+
         pass
 
     @staticmethod
