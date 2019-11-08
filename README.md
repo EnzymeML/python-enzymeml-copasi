@@ -10,7 +10,14 @@ install the requirements directly using `pip install -r requirements.txt`.
 ### Usage
 To use the importer from the command line you would simply run: 
 
-    python enzymeml_importer.py <>
+    python enzymeml_importer.py <enzyme ml archive> <output dir>
+    
+This will convert the provided `enzyme ml archive` to a COPASI file and an experimental data file in the provided `output dir`. 
+
+This COPASI file can then be loaded into COPASI, the corresponding kinetic specified, 
+and a parameter estimation carried out. Here an example of how that could look like (using the provided example output file): 
+
+<img src="./doc/demo.gif">
 
 
 ### EnzymeML
