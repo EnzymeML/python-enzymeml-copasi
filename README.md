@@ -4,8 +4,14 @@ This project hosts a python importer that takes an EnzymeML archive, and generat
 From this point on you could open the resulting file in COPASI, select a candidate kinetic law from the function database (or enter your own). Once done you can let the kinetic parameters estimated by COPASI. 
 
 ### Setup
+The best thing to do, is to create a new virtual environment and simply 
+install the requirements directly using `pip install -r requirements.txt`. 
 
 ### Usage
+To use the importer from the command line you would simply run: 
+
+    python enzymeml_importer.py <>
+
 
 ### EnzymeML
 EnzymeML is an open interchange format for enzyme kinetics, it is an SBML based dialect, includes measurements as TSV files, and is shipped as COMBINE archive. More information about EnzymeML can be found: 
