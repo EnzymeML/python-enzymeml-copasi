@@ -1,0 +1,3 @@
+[submodule "python-enzymeml"]
+	path = python-enzymeml
+	url = https://github.com/EnzymeML/python-enzymeml.git
