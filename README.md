@@ -1,3 +1,5 @@
+![https://github.com/EnzymeML/python-enzymeml-copasi/actions](https://github.com/actions/EnzymeML/python-enzymeml-copasi/.github/workflows/pythonpackage.yml/badge.svghttps://github.com/EnzymeML/python-enzymeml-copasi/workflows/Python%20package/badge.svg)
+
 ## EnzymeML -> COPASI importer
 This project hosts a python importer that takes an EnzymeML archive, and generates a COPASI Model along with the transformed experimental data out of it. The data will be mapped to the model entities in question. 
 
