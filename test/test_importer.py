@@ -7,7 +7,7 @@ sys.path.append(os.path.join(_PATH, 'python-enzymeml'))
 
 try:
     import enzymeml_importer
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     from .. import enzymeml_importer
 
 
