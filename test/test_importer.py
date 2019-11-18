@@ -1,14 +1,10 @@
 import COPASI
 import sys
 import os
-_PATH = os.path.abspath("../")
+_PATH = os.path.abspath("./")
 sys.path.append(_PATH)
 sys.path.append(os.path.join(_PATH, 'python-enzymeml'))
-
-try:
-    import enzymeml_importer
-except (ImportError, ModuleNotFoundError):
-    from .. import enzymeml_importer
+import enzymeml_importer
 
 
 def test_copasi_version():
