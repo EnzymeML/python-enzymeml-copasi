@@ -1,6 +1,7 @@
 import COPASI
 import sys
 import os
+# until enzymeml is in pypi
 sys.path.append(os.path.abspath("./python-enzymeml"))
 import enzymeml.enzymeml as enzml
 
@@ -54,20 +55,24 @@ class EnzymeMLImporter:
                 if col.type == 'time' and 'time' not in all_cols:
                     all_columns['time'] = []
                     all_cols.append('time')
-                    col_cn_map['time'] = dm.getModel().getValueReference().getCN()
+                    col_cn_map['time'] = \
+                        dm.getModel().getValueReference().getCN()
                     for entry in file_entry.columns[count]:
                         time.add(entry)
                     count += 1
                     continue
-                if col.type =='conc':
+                if col.type == 'conc':
                     if col.species not in all_cols:
                         all_columns[col.species] = []
                         all_cols.append(col.species)
-                        col_cn_map[col.species] = self._get_cn_by_id(col.species)
+                        col_cn_map[col.species] = \
+                            self._get_cn_by_id(col.species)
                     if col.replica not in all_columns[col.species]:
                         all_columns[col.species].append(col.replica)
-                        max_num_replicas = max(max_num_replicas, len(all_columns[col.species]))
-                        data_dict[(col.species, col.replica)] = file_entry.columns[count]
+                        max_num_replicas = max(max_num_replicas,
+                                               len(all_columns[col.species]))
+                        data_dict[(col.species, col.replica)] = \
+                            file_entry.columns[count]
                 count += 1
 
         time = sorted(time)
@@ -81,7 +86,8 @@ class EnzymeMLImporter:
             for entry in reaction[1].replicas:
                 needed_data[id].append((entry.measurement, entry.replica))
 
-        for measurement in reaction_data.listOfMeasurements.measurements.values():
+        for measurement in \
+                reaction_data.listOfMeasurements.measurements.values():
             file_entry = reaction_data.listOfFiles.files[measurement.file]
             data = file_entry.columns
             format = reaction_data.listOfFormats.formats[file_entry.format]
@@ -105,7 +111,8 @@ class EnzymeMLImporter:
                             data.write(str(time[rowcount]))
                         else:
                             species = all_cols[col]
-                            replica = all_columns[species][replica_index] if replica_index < len(all_columns[species]) \
+                            replica = all_columns[species][replica_index] \
+                                if replica_index < len(all_columns[species]) \
                                 else None
                             if replica is not None:
                                 value = data_dict[(species, replica)][rowcount]
@@ -119,9 +126,11 @@ class EnzymeMLImporter:
 
         # now create mapping for COPASI
         task = dm.getTask('Parameter Estimation')
-        task.setScheduled(True)  # mark task as executable, so it can be run by copasi se
+        # mark task as executable, so it can be run by copasi se
+        task.setScheduled(True)
         problem = task.getProblem()
-        problem.setCalculateStatistics(False)  # disable statistics at the end of the runs
+        # disable statistics at the end of the runs
+        problem.setCalculateStatistics(False)
         exp_set = problem.getExperimentSet()
 
         exp = COPASI.CExperiment(dm)
@@ -163,7 +172,8 @@ class EnzymeMLImporter:
         # import sbml model
         sbml = self.archive.master.toSBML()
         if not dm.importSBMLFromString(sbml):
-            raise ValueError("Couldn't import SBML model: " + COPASI.CCopasiMessage.getAllMessageText())
+            raise ValueError("Couldn't import SBML model: " +
+                             COPASI.CCopasiMessage.getAllMessageText())
 
         dm.saveModel(self.copasi_file, True)
 
