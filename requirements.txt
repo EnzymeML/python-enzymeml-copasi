@@ -2,3 +2,4 @@ python-copasi
 python-libcombine
 python-libsbml-experimental
 xlrd
+pytest
