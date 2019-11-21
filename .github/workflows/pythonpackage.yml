@@ -9,14 +9,10 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [2.7, 3.7]
+        python-version: [2.7, 3.5, 3.6, 3.7]
 
     steps:
     - uses: actions/checkout@v1
-    - name: install zip lib
-      uses: mstksg/get-package@v1
-      with:
-        apt-get: zlib1g-dev
     - name: Checkout submodules
       uses: textbook/git-checkout-submodule-action@2.0.0
     - name: Set up Python ${{ matrix.python-version }}
