@@ -23,3 +23,29 @@ def test_import():
     importer.convert()
 
     assert os.path.exists(importer.copasi_file)
+
+
+def test_import_BA():
+    test_file = os.path.join(
+        os.path.join(_PATH, 'example'), 'BA_selfligation.omex')
+    assert os.path.exists(test_file)
+    out_dir = os.path.join(_PATH, 'out')
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    importer = enzymeml_importer.EnzymeMLImporter(test_file, out_dir)
+    importer.convert()
+
+    assert os.path.exists(importer.copasi_file)
+
+
+def test_import_DMBA():
+    test_file = os.path.join(
+        os.path.join(_PATH, 'example'), 'DMBA_selfligation.omex')
+    assert os.path.exists(test_file)
+    out_dir = os.path.join(_PATH, 'out')
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    importer = enzymeml_importer.EnzymeMLImporter(test_file, out_dir)
+    importer.convert()
+
+    assert os.path.exists(importer.copasi_file)
